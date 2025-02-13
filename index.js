@@ -57,3 +57,11 @@ bot.on('spawn',function() {
     connected=1;
 });
 
+// Auto-restart on crash
+process.on("uncaughtException", (err) => {
+    console.error("Unhandled Error:", err);
+    console.log("Restarting bot...");
+    setTimeout(() => {
+        process.exit(1); // This makes Render restart the bot if configured
+    }, 3000); // Restart after 3 seconds
+});
